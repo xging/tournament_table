@@ -1,0 +1,9 @@
+.btn-customized {
+    background-color: #3a5583;
+    border: 0;
+    font-family: "Catamaran", sans-serif;
+}
+
+.button-list li{
+    display: inline;
+}

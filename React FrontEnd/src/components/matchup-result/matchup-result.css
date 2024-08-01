@@ -1,0 +1,29 @@
+/*Results*/
+.result {
+    font-family: "Catamaran", sans-serif;
+  }
+  .result h5 {
+    color: #fff;
+    background-color: #3a5583;
+    text-align: center;
+    padding:5px 0px;
+    /* padding-top: 5px; */
+  }
+  .result-list {
+    background-color: #fff;
+    border-left:3px dashed #3a5583;
+    height: auto;
+    padding-bottom: 5px;
+  }
+  
+  .result-list ul {
+    list-style-type:decimal;
+    padding-left:35px;
+    padding-top:10px;
+  }
+  .result-list ul li {
+    font-size: 18px;
+    color: #3a5583;
+    font-weight: bold;
+    text-transform: capitalize;
+  }

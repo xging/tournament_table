@@ -1,0 +1,18 @@
+body {
+  background-color: #dfe2eb;
+}
+.text-header {
+  font-family: "Archivo Black", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #3a5583;
+  background-color: #fff;
+  border: 3px solid #3a5583;
+  padding: 25px 25px;
+}
+
+.tournament-table{
+  position: relative;
+  top: 50px;
+  z-index:0;
+}

@@ -1,0 +1,42 @@
+.nav-tabs {
+    font-family: "Catamaran", sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.nav-tabs .nav-link.active {
+    border:0 !important;
+    color: #fff;
+    background-color: #3a5583;
+
+}
+
+.nav-tabs .nav-link{
+    border:0 !important;
+    color: #3a5583;
+    background-color: #fff;
+    border-radius: 0;
+}
+
+
+.nav-link {
+    padding: 18px 25px;
+}
+
+.nav-button{
+    border:0 !important;
+    color: #3a5583;
+    background-color: #fff;
+    border-radius: 0;
+    font-weight: bold;
+    width: 170px;
+}
+
+.nav-button:hover, .nav-button:active{
+    color: #fff;
+    background-color: #3a5583;
+    border:0 !important;
+    box-shadow:none !important;
+}
+.nav-button:focus {
+    box-shadow:none !important;
+}

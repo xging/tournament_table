@@ -1,0 +1,72 @@
+.table {
+  margin-top: 20px;
+}
+
+.table td {
+  vertical-align: middle;
+  padding: 5px;
+}
+
+thead th {
+  text-align: center;
+  background-color: #fff !important;
+  color: #3a5583 !important;
+  border-bottom: 2px solid #3a5583 !important;
+}
+
+tbody td {
+  text-align: center;
+  background-color: rgba(0, 0, 0, .075);
+  /* color:#fff; */
+}
+
+.white-out:hover {
+  background-color: #fff;
+}
+
+.grey-out, .grey-out:hover {
+  background-color: #3a5583;
+}
+
+.text-header {
+  font-family: "Archivo Black", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #3a5583;
+  background-color: #fff;
+  border: 3px solid #3a5583;
+  padding: 25px 25px;
+
+}
+
+.division-text {
+  font-family: "Catamaran", sans-serif;
+  font-optical-sizing: auto;
+  color: #fff;
+  background-color: #3a5583;
+  padding: 25px 25px;
+}
+
+.table {
+  font-family: "Catamaran", sans-serif;
+  font-optical-sizing: auto;
+}
+
+.team-name {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 12px;
+  background-color: #3a5583;
+  color:#fff;
+}
+.match-result{
+  border-left:2px solid #fff !important;
+  background-color: #3a5583;
+  color:#fff; 
+}
+.winner {
+  background-color: #fff;
+  color: #3a5583;
+  font-weight: bold;
+  font-size:16px;
+}

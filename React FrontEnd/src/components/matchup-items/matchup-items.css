@@ -1,0 +1,254 @@
+/*Brackets*/
+.bracket {
+  font-family: "Catamaran", sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0;
+}
+
+.round {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.winners>div {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.matchup:last-child {
+  margin-bottom: 0 !important;
+}
+
+.participants {
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.participant {
+  box-sizing: border-box;
+  color: #3a5583;
+  border: 2px solid #3a5583;
+  background: #fff;
+  width: 224px;
+  height: 48px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
+  margin: 0px 0px 10px 0px;
+}
+
+.participant__winner {
+  color: #60c645;
+  border-color: #60c645 !important;
+}
+
+.participant__loser {
+  /* color: #dc563f;
+  border-color: #dc563f !important; */
+  box-sizing: border-box;
+  color: #3a5583;
+  /* border: 2px solid #3a5583; */
+  background: #fff;
+  width: 224px;
+  height: 48px;
+  /* box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12); */
+  margin: 0px 0px 10px 0px;
+}
+
+
+.matchups h5 {
+  color: #fff;
+  background-color: #3a5583;
+  text-align: center;
+  padding-top: 5px;
+}
+
+.bracket__result {
+  height: 44px;
+  width: 42px;
+  float: right;
+  text-align: center;
+  border-left: 2px solid #3a5583;
+}
+
+.bracket__result span {
+  margin: 0px 0px !important;
+  font-size: 18px !important;
+  line-height: 46px !important;
+}
+
+.participant span {
+  margin: 0 10px;
+  line-height: 48px;
+  font-size: 14px;
+  /*16*/
+  font-family: "Catamaran", sans-serif;
+}
+
+.bracket__connector--filled .line,
+.bracket__connector--filled-bottom .merger:after,
+.bracket__connector--filled-top .merger:before {
+  border-color: #60c645;
+}
+
+.line,
+.merger {
+  box-sizing: border-box;
+  width: 32px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.line {
+  border-bottom: thin solid #c0c0c8;
+  height: 64px;
+}
+
+.merger {
+  position: relative;
+  height: 128px;
+}
+
+.connector__one {
+  top: -68px;
+  position: relative;
+}
+
+.connector__two {
+  top: 102px;
+  position: relative;
+}
+
+.connectors {
+  width: 65px;
+}
+
+.connector__one .merger:before,
+.connector__one .merger:after {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: 58%;
+  border: 0 dashed;
+  border-color: #3a5583;
+  margin-top: 2px;
+}
+
+.connector__one .merger:before {
+  border-right-width: 3px;
+  border-top-width: 3px;
+}
+
+.connector__one .merger:after {
+  border-right-width: 3px;
+  border-bottom-width: 3px;
+}
+
+
+.connector__one .line {
+  border-bottom: 3px dashed #3a5583;
+  height: 78px;
+}
+
+.connector__two {
+  height: 160px;
+}
+
+.connector__two .merger:before,
+.connector__two .merger:after {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: 59%;
+  border: 0 dashed;
+  border-color: #3a5583;
+}
+
+.connector__two .merger:before {
+  border-right-width: 3px;
+  border-top-width: 3px;
+}
+
+.connector__two .merger:after {
+  border-right-width: 3px;
+  border-bottom-width: 3px;
+}
+
+
+.connector__two .line {
+  border-bottom: 3px dashed #3a5583;
+  height: 76px;
+}
+
+.bracket__connector--three .merger:before,
+.bracket__connector--three .merger:after {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: 55%;
+  border: 0 dashed;
+  border-color: #3a5583;
+  margin-right: 5px;
+}
+
+.bracket__connector--three .merger:before {
+  border-right-width: 3px;
+  border-top-width: 3px;
+}
+
+.bracket__connector--three .merger:after {
+  border-right-width: 3px;
+  border-bottom-width: 3px;
+}
+
+.round__quarterfinals .winners:not(:last-child) {
+  margin-bottom: 32px;
+}
+
+.round__quarterfinals .matchup:not(:last-child) {
+  margin-bottom: 32px;
+}
+
+.round__semifinals .matchup:not(:last-child) {
+  margin-bottom: 180px;
+}
+
+.round__semifinals .merger {
+  height: 271px;
+}
+
+.round__semifinals .line {
+  height: 128px;
+}
+
+.round__finals .merger {
+  height: 48px;
+}
+
+.round__finals .line {
+  height: 24px;
+}
+
+
+.tgl-btn{
+  border:0 !important;
+  color: #3a5583;
+  background-color: #fff;
+  border-radius: 0;
+  font-weight: bold;
+  width: 224px;
+}
+
+.tgl-btn:hover, .tgl-btn:active{
+  color: #fff;
+  background-color: #3a5583;
+  border:0 !important;
+  box-shadow:none !important;
+}
+.tgl-btn:focus {
+  box-shadow:none !important;
+  border:0 !important;
+  outline: 0;
+}
