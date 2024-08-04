@@ -83,6 +83,16 @@ class DatabaseServiceT implements DatabaseServiceInterface
         $divisionWinners->setResult($result);
         $divisionWinners->setPickedFlag($pickedFlag);
         $this->em->persist($divisionWinners);
+
+
+        $this->logger->info("Persisting division winner: " . json_encode([
+            'divisionId' => $divisionId,
+            'teamID' => $teamId,
+            'name' => $teamName,
+            'score' => $result,
+            'status' => $pickedFlag
+        ]));
+
         $this->em->flush();
         return $divisionWinners;
     }
@@ -152,6 +162,33 @@ class DatabaseServiceT implements DatabaseServiceInterface
     {
         $team = $this->em->getRepository(Teams::class)->findOneBy(['shortname' => $shortName]);
         return $team ? $team->getName(): null;
+    }
+
+    public function getTeamByPickedFlag(bool $flag): array
+    {
+        $teams = $this->em->getRepository(Teams::class)->findBy([
+            'pickedFlag' => $flag
+        ]);
+    
+        $this->logger->warning(sprintf("Flag here2: %s.", $flag ? 'true' : 'false'));
+    
+        return $teams;
+    }
+
+    public function getTeamIdByName(string $name): ?int
+    {
+        $team = $this->em->getRepository(Teams::class)->findOneBy(['shortname' => $name]);
+        return $team ? $team->getTeamId() : null;
+    }
+
+
+    public function getDWByDivisionId(int $divisionId): array
+    {
+        $divisionWinner = $this->em->getRepository(DivisionWinners::class)->findBy([
+            'division_id' => $divisionId
+        ]);
+    
+        return $divisionWinner;
     }
 
     public function clearTable(string $tableName): void
@@ -407,5 +444,22 @@ public function setQWPickedFlagByName(string $name, bool $flag): ?QuarterfinalWi
             $this->logger->error('semifinalWinners Произошла ошибка: ' . $e->getMessage());
             return null;
         }
-        }
+    }
+
+    public function setDWResultById(int $teamId, int $res): ?DivisionWinners
+    {
+        $dw = $this->em->getRepository(DivisionWinners::class)->findOneBy(['team_id' => $teamId]);
+        $dw->setResult($res);
+        $this->em->flush(); 
+        return $dw;
+    }
+
+    
+    public function getDWResultById(int $teamId): ?Int
+    {
+        $dw = $this->em->getRepository(DivisionWinners::class)->findOneBy(['team_id' => $teamId]);
+        return $dw ? $dw->getTeamId() : null;
+    }
+
+
 }

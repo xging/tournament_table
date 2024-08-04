@@ -32,9 +32,11 @@ interface DatabaseServiceInterface
 
     public function getPickedFlagByShortName(string $shortName): ?bool;
     public function setPickedFlagByTeamShortName(string $shortName, bool $flag): ?Teams;
+    public function getTeamByPickedFlag(bool $flag): ?array;
     public function getTeamIdByPickedFlag(bool $flag): ?int;
+    public function getTeamIdByName(string $name): ?int;
     public function getShortNameByPickedFlag(bool $flag, int $divisionId): ?array;
-
+    public function getDWByDivisionId(int $divisionId): array;
     public function addIndexId(int $id, string $stage): ?IndexCountTemp;
     public function getIndexId(string $stage): ?int;
     public function setIndexId(int $value, string $stage): ?IndexCountTemp;
@@ -49,4 +51,7 @@ interface DatabaseServiceInterface
     public function getMatchResultByName(string $Name): ?int;
     public function setMatchResultByName(string $name, string $value): ?Teams;
     public function getDivisions(string $name): ?Divisions;
+
+    public function setDWResultById(int $teamId, int $res): ?DivisionWinners;
+    public function getDWResultById(int $teamId): ?Int;
 }
