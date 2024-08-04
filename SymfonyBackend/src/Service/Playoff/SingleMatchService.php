@@ -146,7 +146,13 @@ class SingleMatchService implements PFSingleMatchesServiceInterface
             throw new Exception('Not enough participants to generate a match.');
         }
 
-        $possibleScores = ['2:0', '2:1', '1:2', '0:2'];
+
+        
+        if($stagesArr[3] === $stage) {
+            $possibleScores = ['3:0', '3:1', '3:2', '2:3', '1:3', '0:3'];
+        } else {
+            $possibleScores = ['2:0', '2:1', '1:2', '0:2'];
+        }
         shuffle($filteredParticipants);
 
         $matches = [];
