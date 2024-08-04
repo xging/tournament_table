@@ -1,7 +1,8 @@
 <?php
 namespace App\Service\MatchGenerator;
 
-use App\Repository\Teams\TeamsRepositoryInterface;
+use App\Repository\DivisionWinners\DivisionWinnersRepository;
+use App\Repository\Teams\TeamsRepository;
 use App\Service\Interfaces\SingleMatchInterface;
 use Psr\Log\LoggerInterface;
 use App\Service\Database\DatabaseServiceInterface;
@@ -13,19 +14,21 @@ use App\Service\MatchGenerator\MatchGenerator;
 class SingleMatchService implements SingleMatchInterface
 {
     private MatchesRepositoryInterface $matchesRepository;
-    private TeamsRepositoryInterface $teamsRepository;
+    private TeamsRepository $teamsRepository;
     private DatabaseServiceInterface $databaseService;
     private LoggerInterface $logger;
     private MatchGenerator $matchGenerator;
     private WinnerPicker $winnerPicker;
+    private DivisionWinnersRepository $divisionWinnersRepository;
 
     public function __construct(
         MatchesRepositoryInterface $matchesRepository,
         DatabaseServiceInterface $databaseService,
-        TeamsRepositoryInterface $teamsRepository,
+        TeamsRepository $teamsRepository,
         LoggerInterface $logger,
         MatchGenerator $matchGenerator,
-        WinnerPicker $winnerPicker
+        WinnerPicker $winnerPicker,
+        DivisionWinnersRepository $divisionWinnersRepository
     ) {
         $this->matchesRepository = $matchesRepository;
         $this->databaseService = $databaseService;
@@ -33,6 +36,7 @@ class SingleMatchService implements SingleMatchInterface
         $this->teamsRepository = $teamsRepository;
         $this->matchGenerator = $matchGenerator;
         $this->winnerPicker = $winnerPicker;
+        $this->divisionWinnersRepository = $divisionWinnersRepository;
     }
 
     public function createMatches(array $teams, string $divisionName, int $divisionId): array
@@ -93,17 +97,73 @@ class SingleMatchService implements SingleMatchInterface
             $teamResult = $this->databaseService->getMatchResult($teamName);
             $teamRes = $count + $teamResult;
             $this->databaseService->setMatchResult($teamName, $teamRes);
+           
+
+            $teamID = $this->databaseService->getTeamIdByShortName($teamName);
+            if(($this->databaseService->getDWResultById($teamID))) {
+                $this->databaseService->setDWResultById($teamID, $teamRes);
+            }
+           
         }
 
         arsort($wins);
+        $this->logger->info('Winner teams:', $wins);
         $topTeams = array_slice(array_keys($wins), 0, 4);
+        $this->logger->info('Top teams:', $topTeams);
+
+        // $topTeamsRes = $this->databaseService->getTeamByShortName()
+        
+       
         foreach ($topTeams as $teamName) {
+        
+            
+
             $teamId = $this->databaseService->getTeamIdByShortName($teamName);
             $teamFullName = $this->databaseService->getTeamByShortName($teamName);
-            if ($teamId !== null) {
-                $this->databaseService->addDivisionWinners($divisionId, $teamId, $teamFullName, $wins[$teamName], false);
-            }
+            $teamIsPickedForWin = $this->databaseService->getPickedFlagByShortName($teamName);
+
+
+
+            // if ($teamId !== null && $teamIsPickedForWin) {
+            //     $this->databaseService->addDivisionWinners($divisionId, $teamId, $teamFullName, $wins[$teamName], false);
+            // }
+
+
+
+            $this->logger->info("Win res: $teamName $wins[$teamName]");
+
+
         }
+
+
+         //Add Division Winners
+
+         $divisionWinnersList = $this->databaseService->getDWByDivisionId($divisionId);
+         $this->logger->info("Initial division winners: " . json_encode($divisionWinnersList));
+
+         if (empty($divisionWinnersList)) {
+             $divisionsWinners = $this->databaseService->getTeamByPickedFlag(true);
+        
+             foreach ($divisionsWinners as $index => $divisionsWinner) {
+                 $this->databaseService->addDivisionWinners(
+                     $divisionId,
+                     $divisionsWinner->getTeamID(),
+                     $divisionsWinner->getName(),
+                     0,
+                     false
+                 );
+                $this->logger->info("Team: ".$divisionsWinner->getName());
+                $this->logger->info("Division winners here.");
+                
+                if($index === 3) {
+                    break;
+                }
+             }
+         
+             $this->logger->info("Division winners added successfully.");
+         } else {
+             $this->logger->info("Division winners table is full!");
+         }
 
         return ['matches' => $matches, 'wins' => $wins, 'topTeams' => $topTeams];
     }
